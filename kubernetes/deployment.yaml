@@ -12,13 +12,14 @@ spec:
 
   template:
     metadata:
+      name : angular-kube-demo
       labels:
         app: angular-kube-demo
 
     spec:
      containers:
        - name : angular-kube-demo
-         image: kubernetes-angular
+         image: dockerenthusiast1992/kubernetes-angular:latest
          ports:
           - containerPort : 80
          resources: {}
