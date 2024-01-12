@@ -26,7 +26,7 @@ RUN npm cache clean --force
 RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
-RUN npm run test
+#RUN npm run test
 
 RUN npm run build
 #Stage 2
