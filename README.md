@@ -1,27 +1,41 @@
-# KubernetesAngular
+yaml file reference:
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+1. apiVersion :Which version of the Kubernetes API you're using to create this object
+2. kind :What kind of object you want to create eg: Pod,Deployment etc
+3. metadata :Data that helps uniquely identify the object,
 
-## Development server
+Properties Under metadata
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+=> name: name assigned to the object
+=> labels:key/value pairs used to specify identifying attributes of objects that are meaningful and relevant to users
 
-## Code scaffolding
+4. spec : the state you desire for the object. The precise format of the object spec is different for every Kubernetes object, and contains nested fields specific to that object.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+spec object properties for Deployment object
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. selector:A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
 
-## Running unit tests
+matchLabels is a map of {key,value} pairs. 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. template:Template describes the pods that will be created. 
 
-## Running end-to-end tests
+Properties under template:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+=>metadata : data which helps to uniquely identify the object
 
-## Further help
+=>spec:Specification of the desired behavior of the pod. 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+spec object properties for Pod Object
+
+1. containers :List of containers belonging to the pod. 
+
+properties under containers
+=>name:Name of the container specified as a DNS_LABEL. Each container in a pod must have a unique name (DNS_LABEL).
+
+=>image:Container image name. 
+
+=>ports:List of ports to expose from the container. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default "0.0.0.0" address inside a container will be accessible from the network.
+
+containerPort:Number of port to expose on the pod's IP address. This must be a valid port number, 0 < x < 65536.
+

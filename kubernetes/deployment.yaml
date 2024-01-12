@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: angular-kube-demo
+ labels:
+  app: angular-kube-demo
+
+spec:
+  selector:
+    matchLabels:
+      app: angular-kube-demo
+
+  template:
+    metadata:
+      labels:
+        app: angular-kube-demo
+
+    spec:
+     containers:
+       - name : angular-kube-demo
+         image: kubernetes-angular
+         ports:
+          - containerPort : 80
+         resources: {}
