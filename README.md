@@ -1,3 +1,28 @@
+Kubernetes Objects and their Purpose
+
+1. Pod: Group of 1 or more containers.
+
+2. Deployment: You can define the desired state in a deployment and the deployment controller is
+responsible for changing the current state to the desired state.
+
+3. Replica Set :It ensures that a stable set of pods which are exact replicas of each other are
+running at any given time
+
+4. Services:For a given Deployment in your cluster, the set of Pods running in one moment in time could be different from the set of Pods running that application a moment later.Each Pod gets its own IP address.
+Pods are ephemeral resources (you should not expect that an individual Pod is reliable and durable).
+
+This leads to a problem: if some set of Pods (call them "backends") provides functionality to other Pods (call them "frontends") inside your cluster, how do the frontends find out and keep track of which IP address to connect to, so that the frontend can use the backend part of the workload?
+
+Enter Services.
+
+For example, consider a stateless image-processing backend which is running with 3 replicas i.e 3 pods which are replicas of each other are running the same application. Those replicas are fungible—frontends do not care which backend they use. While the actual Pods that compose the backend set may change, the frontend clients should not need to be aware of that, nor should they need to keep track of the set of backends themselves.
+
+The Service abstraction enables this decoupling.
+
+You use a Service to make that set of Pods available on the network so that clients can interact with it.
+
+
+
 yaml file reference:
 
 1. apiVersion :Which version of the Kubernetes API you're using to create this object
@@ -17,6 +42,9 @@ spec object properties for Deployment object
 1. selector:A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.
 
 matchLabels is a map of {key,value} pairs. 
+
+.spec.selector is a required field that specifies a label selector for the Pods targeted by this Deployment.
+.spec.selector must match .spec.template.metadata.labels, or it will be rejected by the API.
 
 2. template:Template describes the pods that will be created. 
 
