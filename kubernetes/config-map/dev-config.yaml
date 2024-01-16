@@ -7,6 +7,4 @@ data:
   var1 : "DEV"
   var2 : "I am in dev env"
 
-#kubectl create -f kubernetes/config-map/dev-config.yaml
-
 

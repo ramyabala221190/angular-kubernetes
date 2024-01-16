@@ -6,5 +6,3 @@ metadata:
 data:
   var1 : "QA"
   var2 : "I am in qa env"
-
-#kubectl create -f kubernetes/config-map/qa-config.yaml
