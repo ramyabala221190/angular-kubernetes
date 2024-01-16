@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: angular-kube-deployment
+ name: angular-kube-dev-deployment
  labels:
-  app: angular-kube-app
+  app: angular-kube-dev-app
 
 spec:
   selector:
     matchLabels:
-      app: angular-kube-pod
+      app: angular-kube-dev-pod
 
   template:
     metadata:
       labels:
-        app: angular-kube-pod
+        app: angular-kube-dev-pod
 
     spec:
      containers:
@@ -26,4 +26,3 @@ spec:
            - configMapRef:
                name : dev-app-config
 #we are loading all environment variables from the config map with name :dev-app-config
-
