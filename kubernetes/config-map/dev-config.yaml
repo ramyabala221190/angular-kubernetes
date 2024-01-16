@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-app-config
+
+data:
+  var1 : "DEV"
+  var2 : "I am in dev env"
+
+#kubectl create -f kubernetes/config-map/dev-config.yaml
+
+

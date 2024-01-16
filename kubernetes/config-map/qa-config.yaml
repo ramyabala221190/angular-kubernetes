@@ -1,0 +1,10 @@
+apiVersion : v1
+kind : ConfigMap
+metadata:
+  name: qa-app-config
+
+data:
+  var1 : "QA"
+  var2 : "I am in qa env"
+
+#kubectl create -f kubernetes/config-map/qa-config.yaml

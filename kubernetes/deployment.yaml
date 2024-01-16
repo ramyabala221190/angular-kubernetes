@@ -17,8 +17,13 @@ spec:
 
     spec:
      containers:
-       - name : angular-kube-container
+       - name : angular-dev-kube-container
          image: angular-kube-image
          ports:
           - containerPort : 80
          resources: {}
+         envFrom :
+           - configMapRef:
+               name : dev-app-config
+#we are loading all environment variables from the config map with name :dev-app-config
+
