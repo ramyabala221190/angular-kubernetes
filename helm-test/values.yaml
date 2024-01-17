@@ -5,7 +5,6 @@ deployment:
 pod:
  name: angular-kube-dev-pod
  containerName: angular-dev-kube-container
- imageName: angular-kube-image
  containerPort: 80
 
 services:
