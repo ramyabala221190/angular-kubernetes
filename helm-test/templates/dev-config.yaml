@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-app-config
+
+data:
+  var1 : "DEV"
+  var2 : "I am in dev env"
+
+

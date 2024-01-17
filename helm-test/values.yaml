@@ -1,0 +1,14 @@
+deployment:
+  name: angular-kube-dev-deployment
+  app: angular-kube-dev-app
+
+pod:
+ name: angular-kube-dev-pod
+ containerName: angular-dev-kube-container
+ imageName: angular-kube-image
+ containerPort: 80
+
+services:
+  name: nginx-loadbalancer-dev
+  appPort: 8081
+  type: LoadBalancer

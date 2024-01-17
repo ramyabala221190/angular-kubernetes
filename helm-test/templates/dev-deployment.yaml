@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: {{.Values.deployment.name}}
+ labels:
+  app: {{.Values.deployment.app}}
+
+spec:
+  selector:
+    matchLabels:
+      app: {{.Values.pod.name}}
+
+  template:
+    metadata:
+      labels:
+        app: {{.Values.pod.name}}
+
+    spec:
+     containers:
+       - name : {{.Values.pod.containerName}}
+         image: {{.Values.pod.imageName}}
+         ports:
+          - containerPort : {{.Values.pod.containerPort}}
+         resources: {}
+         envFrom :
+           - configMapRef:
+               name : dev-app-config
+#we are loading all environment variables from the config map with name :dev-app-config
+
+
+#helm install helm-release helm-test
+#helm upgrade helm-release helm-test
