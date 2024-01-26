@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: clusterip-service
+  name: {{.Values.cluster.name}}
 spec:
- type: ClusterIP
+ type: {{.Values.cluster.type}}
  selector:
-     app: angular-kube-pod
+    app: {{.Values.pod.name}}
  ports:
- - port: 8084
-   targetPort: 80
+ - port: {{.Values.cluster.appPort}} #cluster ip port
+   targetPort: {{.Values.pod.containerPort}} #pod port
 
 #service directs the traffic on port 80 to port 8084 on any pod with selector app=angular-kube-pod
 #ClusterIP service is only for internal pod communication

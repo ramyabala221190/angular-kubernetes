@@ -1,13 +1,26 @@
 deployment:
-  name: angular-kube-dev-deployment
-  app: angular-kube-dev-app
+  name: angular-kube-deployment
+  app: angular-kube-app
 
 pod:
- name: angular-kube-dev-pod
- containerName: angular-dev-kube-container
+ name: angular-kube-pod
+ containerName: angular-kube-container
+ imageName: dockerenthusiast1992/kubernetes-angular:161
  containerPort: 80
 
-services:
-  name: nginx-loadbalancer-dev
+dev-services:
+  name: kube-loadbalancer-dev
   appPort: 8081
   type: LoadBalancer
+
+uat-services:
+  name: kube-loadbalancer-uat
+  appPort: 8082
+  type: LoadBalancer
+
+cluster:
+  name: kube-cluster
+  appPort: 8085
+  type: ClusterIP
+
+environment: ""

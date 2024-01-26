@@ -1,3 +1,4 @@
 #!/bin/bash
-echo "Starting container. Runtime env variables: var1=${var1}  var2=${var2}"
+#cp /usr/share/nginx/html/assets/${env}-config.js /usr/share/nginx/html/assets/config.js
+echo "Starting container. Runtime env variables: config=${config}"
 nginx -g 'daemon off;'

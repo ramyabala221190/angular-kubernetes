@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-app-config
+
+data:
+  config : {
+    env: "DEV",
+    var1: "Application is running in DEV environment"
+  }
+
+
+
+

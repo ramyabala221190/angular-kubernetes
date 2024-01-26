@@ -3,12 +3,11 @@ kind: Service
 metadata:
  name: {{.Values.services.name}}
 spec:
- type: {{.Values.services.type}}
+ type: {{.Values.{{.Value.environment}}-services.type}}
  selector:
     app: {{.Values.pod.name}}
  ports:
- - name: "8081"
-   port: {{.Values.services.appPort}}
+   port: {{.Values.{{.Value.environment}}-services.appPort}}
    targetPort: {{.Values.pod.containerPort}}
 #service directs the traffic on port 80 to port 8081 on any pod with selector app=angular-kube-pod
 #there is no need to port-forward the service. you can directly access it on http://localhost:8081
