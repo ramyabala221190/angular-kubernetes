@@ -13,10 +13,4 @@ services:
   type: LoadBalancer
   appPort: 8081
 
-
-cluster:
-  name: kube-cluster
-  appPort: 8085
-  type: ClusterIP
-
 environment: ""
