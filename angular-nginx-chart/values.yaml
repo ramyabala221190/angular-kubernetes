@@ -9,7 +9,7 @@ pod:
 
 services:
   name: "service"
-  type: NodePort
+  type: NodePort  #due to external IP pending issue, changed from LoadBalancer to NodePort
   appPort: 8081
 
 environment: ""
