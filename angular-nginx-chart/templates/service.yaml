@@ -7,7 +7,12 @@ spec:
  selector:
     app: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
  ports:
- - port: {{.Values.services.appPort}}
+ {{if eq .Values.environment dev}}
+ - port: {{.Values.services.devAppPort}}
+ {{end}}
+ {{else if eq .Values.environment uat}}
+ - port: {{.Values.services.uatAppPort}}
+ {{end}}
    targetPort: {{.Values.pod.containerPort}}
 #service directs the traffic on port 80 to port 8081 on any pod with selector app=angular-kube-pod
 #there is no need to port-forward the service. you can directly access it on http://localhost:8081
