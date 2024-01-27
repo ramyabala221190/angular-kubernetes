@@ -4,7 +4,7 @@ metadata:
   name: uat-app-config
 
 data:
-  env: "UAT"
+  env: "uat"
   var1: "Application is running in UAT environment",
 
 

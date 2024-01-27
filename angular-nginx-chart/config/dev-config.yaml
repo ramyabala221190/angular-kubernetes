@@ -4,7 +4,7 @@ metadata:
   name: dev-app-config
 
 data:
-  env: "DEV"
+  env: "dev"
   var1: "Application is running in DEV environment"
 
 
