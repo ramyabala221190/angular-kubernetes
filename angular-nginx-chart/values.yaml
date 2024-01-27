@@ -9,7 +9,7 @@ pod:
 
 services:
   name: "service"
-  type: LoadBalancer
+  type: NodePort
   appPort: 8081
 
 environment: ""
