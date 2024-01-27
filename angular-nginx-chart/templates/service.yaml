@@ -9,7 +9,6 @@ spec:
  ports:
  {{if eq .Values.environment "dev"}}
  - port: {{.Values.services.devAppPort}}
- {{end}}
  {{else if eq .Values.environment "uat"}}
  - port: {{.Values.services.uatAppPort}}
  {{end}}
