@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: {{.Values.kubernetes.chart}}-deployment
+ name: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
  labels:
-  app: {{.Values.kubernetes.chart}}-deployment
+  app: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
 
 spec:
   selector:
     matchLabels:
-      app: {{.Values.kubernetes.chart}}-deployment
+      app: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
 
   template:
     metadata:
       labels:
-        app: {{.Values.kubernetes.chart}}-deployment
+        app: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
 
     spec:
      containers:

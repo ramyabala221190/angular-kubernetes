@@ -5,7 +5,7 @@ metadata:
 spec:
  type: {{.Values.services.type}}
  selector:
-    app: {{.Values.pod.name}}
+    app: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
  ports:
  - port: {{.Values.services.appPort}}
    targetPort: {{.Values.pod.containerPort}}
