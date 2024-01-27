@@ -4,9 +4,8 @@ metadata:
   name: uat-app-config
 
 data:
-  config : {
-    env: {{.Values.environment}},
-    var1: "Application is running in UAT environment",
-  }
+  env: {{.Values.environment}},
+  var1: "Application is running in UAT environment",
+
 
 
