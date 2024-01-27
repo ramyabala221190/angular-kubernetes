@@ -1,0 +1,15 @@
+kubernetes:
+  chart: angular-nginx-chart
+  namespace: angular-nginx-chart-namespace
+
+pod:
+ containerName: "container"
+ imageName: ""
+ containerPort: 80
+
+services:
+  name: "service"
+  type: LoadBalancer
+  appPort: 8081
+
+environment: ""
