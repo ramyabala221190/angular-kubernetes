@@ -5,7 +5,7 @@ metadata:
 
 data:
   config : {
-    env: "DEV",
+    env: "{{. Values.environment}}",
     var1: "Application is running in DEV environment"
   }
 

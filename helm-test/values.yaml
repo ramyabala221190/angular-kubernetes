@@ -8,15 +8,17 @@ pod:
  imageName: dockerenthusiast1992/kubernetes-angular:161
  containerPort: 80
 
-dev-services:
-  name: kube-loadbalancer-dev
-  appPort: 8081
+
+dev:
+    appPort: 8081
+uat:
+    appPort: 8082
+
+
+services:
+  name: kube-loadbalancer
   type: LoadBalancer
 
-uat-services:
-  name: kube-loadbalancer-uat
-  appPort: 8082
-  type: LoadBalancer
 
 cluster:
   name: kube-cluster
