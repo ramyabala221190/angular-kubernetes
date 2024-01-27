@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: {{.Values.deployment.name}}
+ name: {{.Values.deployment.name}}-{{.Values.environment}}
  labels:
-  app: {{.Values.deployment.app}}
+  app: {{.Values.deployment.app}}-{{.Values.environment}}
 
 spec:
   selector:
     matchLabels:
-      app: {{.Values.pod.name}}
+      app: {{.Values.pod.name}}-{{.Values.environment}}
 
   template:
     metadata:
       labels:
-        app: {{.Values.pod.name}}
+        app: {{.Values.pod.name}}-{{.Values.environment}}
 
     spec:
      containers:
-       - name : {{.Values.pod.containerName}}
+       - name : {{.Values.pod.containerName}}-{{.Values.environment}}
          image: {{.Values.pod.imageName}}
          ports:
           - containerPort : {{.Values.pod.containerPort}}
