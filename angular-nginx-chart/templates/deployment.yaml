@@ -20,7 +20,7 @@ spec:
        - name : {{.Values.kubernetes.chart}}-{{.Values.pod.containerName}}-{{.Values.environment}}
          image: {{.Values.pod.imageName}}
          ports:
-          - containerPort : {{.Values.pod.containerPort}}
+          - containerPort : {{.Values.pod.containerPort}} #this should match the port nginx listening on
          envFrom :
            - configMapRef:
                name : {{.Values.environment}}-app-config
