@@ -5,7 +5,7 @@ metadata:
 
 data:
   env: "uat"
-  var1: "Application is running in UAT environment",
+  var1: "Application is running in UAT environment"
 
 
 
