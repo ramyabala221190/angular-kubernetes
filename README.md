@@ -1,3 +1,12 @@
+We are creating a seperate namespace for each environment
+Each environment will have its own application port
+
+Checking logs for the pod:
+kubectl logs -p <pod-name> --previous=false
+
+Checking logs for service:
+kubectl describe service/<service-name>
+
 Kubernetes Objects and their Purpose
 
 1. Pod: Group of 1 or more containers.
@@ -66,4 +75,217 @@ properties under containers
 =>ports:List of ports to expose from the container. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default "0.0.0.0" address inside a container will be accessible from the network.
 
 containerPort:Number of port to expose on the pod's IP address. This must be a valid port number, 0 < x < 65536.
+
+Spec  of a service
+
+spec.selectors will identify the pods handled by the service.
+You must provide with the correct identification.
+
+---------------------------------------------------------------------------------------------------------------
+1. NodePort type service
+
+port:8081
+NodePort:31099  /either you set or system sets it for you
+targetPort:80
+
+targetPort is the port on which the container is litening inside the pod.
+It must be the same as the port on which the nginx webserver is listening
+
+NodePort is the port on which the nodeport service inside the cluster is listening to
+
+port is the port on the cluster IP service is listenting. This is also the port on which you
+access the application in the browser.
+
+Client Request---->nodeIp:Nodeport ---->clusterIp:port ----> podIp:targetPort
+
+Using "kubectl get pod/angular-kube-dev-deployment-6c454b9b4-25q6z -o yaml"
+I can get the podIp and the hostIp/nodeIp
+
+ hostIP: 192.168.65.3
+  phase: Running
+  podIP: 10.1.0.83
+  podIPs:
+  - ip: 10.1.0.83
+  
+From kubectl get services, I can get the cluster IP
+
+PS C:\Users\User\angular\kubernetes-angular> kubectl get services
+NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+kubernetes               ClusterIP   10.96.0.1        <none>        443/TCP          3d18h
+nginx-loadbalancer-dev   NodePort    10.101.192.183   <none>        8081:31099/TCP   3d18h
+PS C:\Users\User\angular\kubernetes-angular> 
+
+Here 10.101.192.183  is the cluster ip.
+
+Now if I "kubectl exec pod/angular-kube-dev-deployment-6c454b9b4-25q6z -it sh"
+i.e shell into the pod to access the project build files or performing curl
+
+I can do 3 things here:
+
+curl nodeIp:Nodeport
+
+/ # curl http://192.168.65.3:31099
+<!doctype html>
+<html lang="en" data-critters-container>
+<head>
+  <meta charset="utf-8">
+  <title>KubernetesAngular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.ef46db3751d8e999.css"></head>
+<body>
+  <app-root></app-root>
+<script src="runtime.b5090f3ab16f25ec.js" type="module"></script><script src="polyfills.7f5ceee59efdad27.js" type="module"></script><script src="main.740f9b04639d4b52.js" type="module"></script></body>
+</html>
+/ #
+
+curl podIp:targetPort
+
+/ # curl http://10.1.0.83
+<!doctype html>
+<html lang="en" data-critters-container>
+<head>
+  <meta charset="utf-8">
+  <title>KubernetesAngular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.ef46db3751d8e999.css"></head>
+<body>
+  <app-root></app-root>
+<script src="runtime.b5090f3ab16f25ec.js" type="module"></script><script src="polyfills.7f5ceee59efdad27.js" type="module"></script><script src="main.740f9b04639d4b52.js" type="module"></script></body>
+</html>
+
+
+curl clusterIp:port
+
+/ # curl http://10.101.192.183:8081
+<!doctype html>
+<html lang="en" data-critters-container>
+<head>
+  <meta charset="utf-8">
+  <title>KubernetesAngular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.ef46db3751d8e999.css"></head>
+<body>
+  <app-root></app-root>
+<script src="runtime.b5090f3ab16f25ec.js" type="module"></script><script src="polyfills.7f5ceee59efdad27.js" type="module"></script><script src="main.740f9b04639d4b52.js" type="module"></script></body>
+</html>
+
+------------------------------------------------------------------------------------------------------------
+
+2. LoadBalancer ---same as Nodeport service but also provides loadbalancing to the nodes.
+
+NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+kubernetes               ClusterIP      10.96.0.1        <none>        443/TCP          3d18h
+nginx-loadbalancer-dev   LoadBalancer   10.101.192.183   localhost     8081:31099/TCP   3d18h
+
+LoadBalancer service is built upon the NodePort service
+
+Port:8081  --- port on which the cluster ip listens for requests from the node and application runs in browser
+TargetPort:80   ---port on which the container inside the pod runs
+node port:31099  ---- port on which the node listens for requests
+
+The cluster ip service loadbalances the traffic to the pods.
+The loadbalancer service loadbalances the traffic to the nodes.
+
+PS C:\Users\User\angular\kubernetes-angular> kubectl get pods
+NAME                                          READY   STATUS    RESTARTS   AGE
+angular-kube-dev-deployment-6c454b9b4-25q6z   1/1     Running   0          150m
+PS C:\Users\User\angular\kubernetes-angular> 
+
+What is the pod and node ip ?
+
+kubectl get pod/angular-kube-dev-deployment-6c454b9b4-25q6z -o yaml
+
+      startedAt: "2024-01-21T06:25:45Z"
+  hostIP: 192.168.65.3
+  phase: Running
+  podIP: 10.1.0.83
+  podIPs:
+  - ip: 10.1.0.83
+  
+ Shell login into the pod
+ 
+ C:\Users\User>kubectl exec angular-kube-dev-deployment-6c454b9b4-25q6z -it sh
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+
+curl podIp:targetPort
+
+
+/ # curl http://10.1.0.83
+<!doctype html>
+<html lang="en" data-critters-container>
+<head>
+  <meta charset="utf-8">
+  <title>KubernetesAngular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.ef46db3751d8e999.css"></head>
+<body>
+  <app-root></app-root>
+<script src="runtime.b5090f3ab16f25ec.js" type="module"></script><script src="polyfills.7f5ceee59efdad27.js" type="module"></script><script src="main.740f9b04639d4b52.js" type="module"></script></body>
+</html>
+/ #
+
+
+curl clusterIp:port
+
+</html>
+/ # curl http://10.101.192.183:8081
+<!doctype html>
+<html lang="en" data-critters-container>
+<head>
+  <meta charset="utf-8">
+  <title>KubernetesAngular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.ef46db3751d8e999.css"></head>
+<body>
+  <app-root></app-root>
+<script src="runtime.b5090f3ab16f25ec.js" type="module"></script><script src="polyfills.7f5ceee59efdad27.js" type="module"></script><script src="main.740f9b04639d4b52.js" type="module"></script></body>
+</html>
+/ #
+
+
+curl servicename:port
+
+/ # curl http://nginx-loadbalancer-dev:8081
+<!doctype html>
+<html lang="en" data-critters-container>
+<head>
+  <meta charset="utf-8">
+  <title>KubernetesAngular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.ef46db3751d8e999.css"></head>
+<body>
+  <app-root></app-root>
+<script src="runtime.b5090f3ab16f25ec.js" type="module"></script><script src="polyfills.7f5ceee59efdad27.js" type="module"></script><script src="main.740f9b04639d4b52.js" type="module"></script></body>
+</html>
+
+
+curl nodeIp:nodePort
+
+/ # curl http://192.168.65.3:31099
+<!doctype html>
+<html lang="en" data-critters-container>
+<head>
+  <meta charset="utf-8">
+  <title>KubernetesAngular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.ef46db3751d8e999.css"></head>
+<body>
+  <app-root></app-root>
+<script src="runtime.b5090f3ab16f25ec.js" type="module"></script><script src="polyfills.7f5ceee59efdad27.js" type="module"></script><script src="main.740f9b04639d4b52.js" type="module"></script></body>
+</html>
+/ #
 
