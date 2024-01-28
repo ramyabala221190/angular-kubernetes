@@ -1,4 +1,5 @@
 {
     "production":false,
-     "baseUrl":"/dummy/dev/api"
+     "baseUrl":"/dummy/dev/api",
+     "env":"dev"
 }

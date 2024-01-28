@@ -1,4 +1,5 @@
 {
     "production":false,
-     "baseUrl":"/dummy/uat/api"
+     "baseUrl":"/dummy/uat/api",
+     "env":"uat"
 }
