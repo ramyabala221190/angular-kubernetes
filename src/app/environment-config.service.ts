@@ -4,7 +4,8 @@ import { tap } from 'rxjs';
 
 export interface environmentConfig{
   env:string|null,
-  port:number|null
+  port:number|null,
+  baseUrl:string
 }
 
 @Injectable({
@@ -16,7 +17,8 @@ export class EnvironmentConfigService {
   
   private envConfig:environmentConfig={
     env:null,
-    port:null
+    port:null,
+    baseUrl:""
   }
 
   loadConfig(){
