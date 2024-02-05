@@ -28,12 +28,6 @@ COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 #RUN npm run test
 
-#COPY ./src/environments/environment.${env}.ts  ./src/environments/environment.ts
-
-COPY ./src/app/assets/json/config-${env}.json  ./src/app/assets/json/config.json
-
-#COPY ./src/app/assets/js/config-${env}.js  ./src/app/assets/js/config.js
-
 RUN npm run build
 #Stage 2
 

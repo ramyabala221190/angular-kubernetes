@@ -1,5 +1,5 @@
-import config from '../assets/json/config.json'
-//import * as config from '../assets/js/config.js';
+//import config from '../assets/json/config.json'
+import * as config from '../assets/js/config.js';
 
 // export const environment = {
 //     env:config.configuration.env,
@@ -7,7 +7,8 @@ import config from '../assets/json/config.json'
 // };
 
 export const environment = {
-    env:config.env,
-    baseUrl:config.baseUrl
+    env:config.configuration.env,
+    baseUrl:config.configuration.baseUrl,
+    var1: config.var1
 };
 

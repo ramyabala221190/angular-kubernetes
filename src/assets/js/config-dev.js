@@ -3,3 +3,5 @@ export const configuration={
     baseUrl:"/dummy/dev/api/new",
     env:"dev"
 }
+
+export const var1= "Hello World DEV"
