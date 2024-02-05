@@ -55,6 +55,7 @@ EXPOSE 80
 
 ADD docker/startup.sh /startup.sh
 RUN chmod +x /startup.sh
+RUN sed -i 's/\r$//' startup.sh
 ENTRYPOINT ["sh","/startup.sh"]
 #CMD ["nginx", "-g", "daemon off;"] 
 #uncomment incase you want to use docker cp
