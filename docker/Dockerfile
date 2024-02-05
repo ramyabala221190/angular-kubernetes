@@ -2,15 +2,9 @@
 #Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 
-#FROM node:alpine as node
-FROM dockerenthusiast1992/node-karma:1.0.0 as node
-
-ARG dockerArg
-#build time arguments
-
-RUN echo "Build time arguments : dockerArg=${dockerArg}"
-
-ENV dockerEnv=${dockerArg}
+FROM node:alpine as node
+#Use the below if running unit test cases with Karma
+#FROM dockerenthusiast1992/node-karma:1.0.0 as node
 
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
