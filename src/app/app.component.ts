@@ -11,7 +11,7 @@ export class AppComponent {
 
   constructor(private envConfigService:EnvironmentConfigService){}
 
-  config:environmentConfig={env:null,port:null,baseUrl:""}
+  config:environmentConfig={env:"",production:false,baseUrl:""}
 
   ngOnInit(){
     this.config=this.envConfigService.fetchEnvConfig();

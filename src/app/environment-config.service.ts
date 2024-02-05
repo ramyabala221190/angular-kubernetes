@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 export interface environmentConfig{
   env:string|null,
-  port:number|null,
-  baseUrl:string
+  baseUrl:string,
+  production:boolean
 }
 
 @Injectable({
@@ -17,8 +16,8 @@ export class EnvironmentConfigService {
   constructor(private http:HttpClient) { }
   
   private envConfig:environmentConfig={
-    env:null,
-    port:null,
+    env:"",
+    production:false,
     baseUrl:""
   }
 
