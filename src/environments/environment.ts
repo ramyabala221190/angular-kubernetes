@@ -1,4 +1,4 @@
-import * as config from '../assets/config.json'
+import config from '../assets/config.json'
 
 export const environment = {
     env:config.env,
