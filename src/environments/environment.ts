@@ -1,7 +1,13 @@
-//import config from '../assets/json/config.json'
-import * as config from '../assets/js/config.js';
+import config from '../assets/json/config.json'
+//import * as config from '../assets/js/config.js';
+
+// export const environment = {
+//     env:config.configuration.env,
+//     baseUrl:config.configuration.baseUrl
+// };
 
 export const environment = {
-    env:config.configuration.env,
-    baseUrl:config.configuration.baseUrl
+    env:config.env,
+    baseUrl:config.baseUrl
 };
+
