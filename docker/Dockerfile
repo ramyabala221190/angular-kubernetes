@@ -5,8 +5,10 @@
 #FROM node:alpine as node
 FROM dockerenthusiast1992/node-karma:1.0.0 as node
 
-ARG env
+ARG dockerArg
 #build time arguments
+
+ENV dockerEnv=${env}
 
 RUN echo "Build time arguments : env=${env}"
 

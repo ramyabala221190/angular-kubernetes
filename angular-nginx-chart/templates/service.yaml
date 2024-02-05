@@ -11,5 +11,7 @@ spec:
  - port: {{.Values.services.devAppPort}}
  {{else if eq .Values.environment "uat"}}
  - port: {{.Values.services.uatAppPort}}
+ {{else if eq .Values.environment "prod"}}
+ - port: {{.Values.services.prodAppPort}}
  {{end}}
    targetPort: {{.Values.pod.containerPort}}   #this should match the port nginx listening on
