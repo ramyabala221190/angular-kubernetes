@@ -8,9 +8,9 @@ FROM dockerenthusiast1992/node-karma:1.0.0 as node
 ARG dockerArg
 #build time arguments
 
-ENV dockerEnv=${dockerArg}
+RUN echo "Build time arguments : dockerArg=${dockerArg}"
 
-RUN echo "Build time arguments : env=${env}"
+ENV dockerEnv=${dockerArg}
 
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
