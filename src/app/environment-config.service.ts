@@ -24,7 +24,7 @@ export class EnvironmentConfigService {
 
   loadConfig(){
     console.log(environment)
-     return this.http.get('/assets/config.json').pipe(
+     return this.http.get('/assets/json/config.json').pipe(
       tap((config:any)=>{
         console.log(config);
           this.envConfig=config;
