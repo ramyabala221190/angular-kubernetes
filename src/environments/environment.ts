@@ -1,14 +1,9 @@
 //import config from '../assets/json/config.json'
-import * as config from '../assets/js/config.js';
-
-// export const environment = {
-//     env:config.configuration.env,
-//     baseUrl:config.configuration.baseUrl
-// };
+//import * as config from '../assets/js/config.js';
 
 export const environment = {
-    env:config.configuration.env,
-    baseUrl:config.configuration.baseUrl,
-    var1: config.var1
+    env:configuration.env,
+    baseUrl:configuration.baseUrl,
+    production:configuration.production
 };
 
