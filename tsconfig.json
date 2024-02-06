@@ -15,8 +15,6 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "allowJs": true,
-    "esModuleInterop":true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
