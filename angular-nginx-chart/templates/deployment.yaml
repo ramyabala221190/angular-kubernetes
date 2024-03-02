@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
+ name: {{.Chart.Name}}-deployment-{{.Values.environment}}
  labels:
-  app: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
+  app: {{.Chart.Name}}-deployment-{{.Values.environment}}
 
 spec:
   selector:
     matchLabels:
-      app: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
+      app: {{.Chart.Name}}-deployment-{{.Values.environment}}
 
   template:
     metadata:
       labels:
-        app: {{.Values.kubernetes.chart}}-deployment-{{.Values.environment}}
+        app: {{.Chart.Name}}-deployment-{{.Values.environment}}
 
     spec:
      containers:
-       - name : {{.Values.kubernetes.chart}}-{{.Values.pod.containerName}}-{{.Values.environment}}
+       - name : {{.Chart.Name}}-{{.Values.pod.containerName}}-{{.Values.environment}}
          image: {{.Values.pod.imageName}}
          ports:
           - containerPort : {{.Values.pod.containerPort}} #this should match the port nginx listening on

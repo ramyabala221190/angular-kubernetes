@@ -1,6 +1,3 @@
-kubernetes:
-  chart: angular-nginx-chart
-  namespace: angular-nginx-chart-namespace
 
 pod:
  containerName: "container"
@@ -9,7 +6,7 @@ pod:
 
 services:
   name: "service"
-  type: NodePort  #due to external IP pending issue, changed from LoadBalancer to NodePort
+  type: LoadBalancer  #due to external IP pending issue, changed from LoadBalancer to NodePort
   devAppPort: 8081
   uatAppPort: 8082
   prodAppPort: 8085
